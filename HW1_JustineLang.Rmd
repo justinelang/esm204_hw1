@@ -1,0 +1,97 @@
+---
+title: "ESM 204 Homework 1"
+author: "Justine Lang"
+date: "2023-04-06"
+output: 
+  html_document: 
+    code_folding: hide
+---
+
+```{r setup, include=FALSE, echo = TRUE, warning = FALSE, message = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+library(tidyverse)
+library(pracma)
+```
+
+
+### 1. Basics of R
+
+**a.** 
+
+```{r}
+seq(0, 10, by = 0.5)
+```
+
+
+**b.**
+
+```{r}
+test_fun <- function(X, a, b) {
+  return(Y = a*X + b)
+}
+```
+
+```{r}
+test_fun(X = 5, b = 10, a = 3)
+```
+
+
+**c.**
+
+```{r}
+test_df <- data.frame(a = c(3),
+                 b = c(10),
+                 X = c(1:10))
+
+test_df$Y = test_fun(a = test_df$a, b = test_df$b, X = test_df$X)
+```
+
+```{r}
+test_df
+```
+
+
+
+**d.**
+
+```{r}
+test_gg <- ggplot(data = test_df, aes(x = X, y = Y)) +
+  geom_point() +
+  theme_minimal()
+
+test_gg
+```
+
+
+
+**e.**
+
+```{r}
+F1 <- function(X, a1, b1) {
+  return(Y = a1*X + b1)
+}
+
+F2 <- function(X, a2, b2) {
+  return(Y = a2*X + b2)
+}
+```
+
+```{r}
+F3 <- function(X, a1, b1, a2, b2) {
+  return(Z = F1 - F2)
+}
+```
+
+```{r}
+# fzero(function(F3(a1 = -2, b1 = 100, a2 = 3, b2 = 0)), 1)
+```
+
+
+
+
+
+
+
+
+
