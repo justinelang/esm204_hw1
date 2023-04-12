@@ -79,13 +79,73 @@ F2 <- function(X, a2, b2) {
 
 ```{r}
 F3 <- function(X, a1, b1, a2, b2) {
-  return(Z = F1 - F2)
+  return(Z = (a1*X + b1) - (a2*X + b2))
 }
 ```
 
 ```{r}
-# fzero(function(F3(a1 = -2, b1 = 100, a2 = 3, b2 = 0)), 1)
+fzero(fun = F3, x = 7, a1 = -2, b1 = 100, a2 = 3, b2 = 0)
 ```
+
+
+
+**f.**
+
+$-2x + 100 = 3x + 0$
+
+$100 = 5x$
+
+$x = 20$
+
+$y = 3(20) = 60$
+
+
+
+
+### 2. Food Bank Markets
+
+**a.**
+
+[Copy over calculations]
+
+
+**b**
+
+[Come back to externalities]
+
+
+
+
+### 3. More Complicated Supply and Demand Problems
+
+**a.**
+
+```{r}
+### Write functions
+
+car_supply <- function(Q) {
+  return(P = 120 + 0.3 * Q^1.3)
+}
+
+### D: P = 1000
+```
+
+
+**i.**
+
+```{r}
+### D - S
+
+equil <- function(Q, b1, b2, a2, c) {
+  return(Z = (b1) - (b2 + a2*Q^c))
+}
+```
+
+```{r}
+# fzero(fun = equil, x = 0, b1 = 1000, b2 = 120, a2 = 0.3, c = 1.3)
+```
+
+
 
 
 
