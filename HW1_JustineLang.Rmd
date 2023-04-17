@@ -17,14 +17,14 @@ library(pracma)
 
 ### 1. Basics of R
 
-**a.** 
+**a. Count** 
 
 ```{r}
 seq(0, 10, by = 0.5)
 ```
 
 
-**b.**
+**b. Write a function**
 
 ```{r}
 test_fun <- function(X, a, b) {
@@ -37,7 +37,7 @@ test_fun(X = 5, b = 10, a = 3)
 ```
 
 
-**c.**
+**c. Build a dataframe**
 
 ```{r}
 test_df <- data.frame(a = c(3),
@@ -53,11 +53,13 @@ test_df
 
 
 
-**d.**
+**d. Plot the dataframe**
 
 ```{r}
 test_gg <- ggplot(data = test_df, aes(x = X, y = Y)) +
   geom_point() +
+  geom_line() +
+  scale_x_continuous(expand = c(0, 0), limits = c(0, 11)) +
   theme_minimal()
 
 test_gg
@@ -65,7 +67,9 @@ test_gg
 
 
 
-**e.**
+**e. Find the intersection of two curves**
+
+**i. & ii.**
 
 ```{r}
 F1 <- function(X, a1, b1) {
@@ -77,6 +81,9 @@ F2 <- function(X, a2, b2) {
 }
 ```
 
+
+**iii.**
+
 ```{r}
 F3 <- function(X, a1, b1, a2, b2) {
   Z = F1(X, a1, b1) - F2(X, a2, b2)
@@ -84,10 +91,15 @@ F3 <- function(X, a1, b1, a2, b2) {
 }
 ```
 
+
+**iv.**
+
 ```{r}
 fzero(fun = F3, x = 7, a1 = -2, b1 = 100, a2 = 3, b2 = 0)
 
+F1(X = 20, a1 = -2, b1= 100)
 ```
+X = 20, Y = 60
 
 
 
@@ -108,12 +120,51 @@ $y = 3(20) = 60$
 
 **a.**
 
-[Copy over calculations]
+What do you predict would be the equilibrium price and quantity of peanut butter that would be traded?
+
+$P = 400 - 0.05Q$
+
+$P = 20 + 0.05Q$
+
+$20 + 0.05Q = 400 - 0.05Q$
+
+$0.1Q = 380$
+
+$Q*$ = **3800 jars of peanut butter**
+
+$P = 20 + 0.05(3800)$
+
+$P*$ = **210 credits per jar**
+
+How would you measure the benefit of the new market to food banks that buy peanut butter? How would you measure the benefit of the new market to food banks that sell peanut butter?
+
+You would calculate consumer and producer surplus by finding the area under the curve. For example:
+
+$1/2(3800)(190) = PS$
+
+**361,000 credits = PS**
+
+$1/2(3800)(190) = CS$
+
+**361,000 credits = CS**
+
 
 
 **b**
 
-[Copy over calculations]
+Do you think this new information [about the 50 credit externality] should change the amount of trade by food banks? Can you design a change to the food bank market that would perfectly account for this externality? What would be the new equilibrium price and quantity.
+
+Because of this externality, fewer jars should be trader for more credits. You can account for this externality in this case by adding it to the supply curve.
+
+$50 + 20 + 0.05Q = 400 - 0.05Q$
+
+$0.1Q = 330$
+
+Q* = **3300 jars of peanut butter**
+
+$P = 70 + 0.05(3300)$
+
+P* = **235 credits per jar**
 
 
 
@@ -138,7 +189,7 @@ car_demand <- function(Q) {
 
 
 
-**i.**
+**i. Optimal quantity of cars sold**
 
 If P* is 1000, we can rearrange the equation to find Q*. 
 
@@ -153,9 +204,10 @@ q_star <- function(P) {
 q_star(P = 1000)
 ```
 
+Q* = 464.7304 cars, which might make more sense as 464 cars. 
 
 
-**ii.**
+**ii. Elasticity of supply**
 
 ```{r}
 elast <- function(Q1, Q2, P1, P2) {
@@ -170,9 +222,11 @@ elast <- function(Q1, Q2, P1, P2) {
 elast(Q1 = 464.7304, Q2 = 656.9102, P1 = 1000, P2 = 1500)
 ```
 
+If we make Q1 = 464.7304, Q2 = 656.9102, P1 = 1000, P2 = 1500, then elasticity of supply = 0.8270593
 
 
-**iii.**
+
+**iii. Benefits of this policy to old car owners (sellers)**
 
 ```{r}
 ### Producer surplus
@@ -180,20 +234,26 @@ elast(Q1 = 464.7304, Q2 = 656.9102, P1 = 1000, P2 = 1500)
 integral(car_demand, xmin=0, xmax=464.7304) - integral(car_supply, xmin=0, xmax=464.7304)
 ```
 
+Calculate the integral to find the area under the curve, below P* but above the supply curve.
+
+PS = $23,1152.90
 
 
-**iv.**
+**iv. Cost to taxpayers**
 
 ```{r}
-### Cost?
+### Total cost?
 
 1000 * 464.7304 
 ```
 
+At the current Q* and P*, the total cost to taxpayers is around $464730.40, 
+or $464,000 if you can't sell a fraction of a car.
+
 
 **b.**
 
-**i.**
+**i. Socially optimal quantity**
 
 ```{r}
 car_mb <- function(Q) {
@@ -215,15 +275,17 @@ f_diff <- function(Q) {
 ### Q = 431.524
 ```
 
+Q* = 431.524, which might make more sense as 431 cars
 
 
-**ii.**
+
+**ii. Socially optimal price**
 
 ```{r}
 car_mb(431.524)
 ```
 
-
+P* = $919.15 per car
 
 
 
